@@ -2,6 +2,13 @@ const stationsStr = "富锦路;友谊西路;宝安公路;共富新村;呼兰路;
 
 const stationArr = stationsStr.split(';');
 
+const url = {
+  'ershoufang': {
+    'lianjia': 'http://sh.lianjia.com/ershoufang/'
+  }
+};
+
 module.exports = {
-  stationArr: stationArr
+  stationArr: stationArr,
+  url: url
 }

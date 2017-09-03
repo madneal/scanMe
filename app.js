@@ -34,7 +34,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-console.dir(config.stationArr);
+// console.dir(config.stationArr);
+const schedule = require('./schedule/schedule');
+
 
 // error handler
 app.use(function(err, req, res, next) {
