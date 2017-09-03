@@ -11,8 +11,16 @@ var dateTime = date.getTime();
 let newDate = new Date();
 newDate.setTime(dateTime + peorid);
 
-schedule.scheduleJob(newDate, () => {
-  console.log(chalk.red('Job start :' + new Date()));
-  crawler.execute();
-})
+const playJob = () => {
+  schedule.scheduleJob(newDate, () => {
+    console.log(chalk.red('Job start :' + new Date()));
+    crawler.execute();
+  })
+}
+
+module.exports = {
+  playJob: playJob
+}
+
+
 

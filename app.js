@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var config = require('./config/config');
-
+const schedule = require('./schedule/schedule');
 var app = express();
 
 // view engine setup
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
 });
 
 // console.dir(config.stationArr);
-const schedule = require('./schedule/schedule');
+schedule.playJob();
 
 
 // error handler
