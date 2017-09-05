@@ -4,7 +4,7 @@ const stationArr = stationsStr.split(';');
 
 const url = {
   'ershoufang': {
-    'lianjia': 'http://sh.lianjia.com/ershoufang/'
+    'lianjia': 'http://sh.lianjia.com/ershoufang/rs'
   }
 };
 

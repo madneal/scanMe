@@ -23,18 +23,14 @@ const execute = () => {
         const $ = cheerio.load(elem);
         const title = trim($('.prop-title').text());
         const mainInfo = strictTrim($('.info-table .row1-text').text());
-        // console.log(chalk.green(mainInfo));
         const totalPrice = trim($('.info-table .total-price').text());
-        // console.log(chalk.blue(totalPrice));
+        const perPrice = $('.info-table .price-item').eq(1).text();
         const location = strictTrim($('.property-tag-container span').eq(0).text());
         const specialExplain = $('.property-tag-container span').eq(1).text();
-        if (specialExplain) {
-          // console.log(chalk.yellow(specialExplain));
-        }
-        // console.log(chalk.bgCyan(location));
         info = {
           title: title,
           mainInfo: mainInfo,
+          perPrice: perPrice,
           totalPrice: totalPrice,
           location: location,
           specialExplain: specialExplain
