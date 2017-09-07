@@ -8,9 +8,13 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var config = require('./config/config');
+const config = require('./config/config');
 const schedule = require('./schedule/schedule');
+const modelLoader = require('./model/model_loder');
+
 var app = express();
+
+modelLoader.initMongooseAndLoadModel(app, config.mongodb);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

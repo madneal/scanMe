@@ -6,9 +6,16 @@ const url = {
   'ershoufang': {
     'lianjia': 'http://sh.lianjia.com/ershoufang/rs'
   }
-};
+}
+
+const mongodb = {
+  connection: 'mongodb://127.0.0.1:27017/real_estate_info',
+  model: 'model',
+  modelName: ['realestate']
+}
 
 module.exports = {
   stationArr: stationArr,
-  url: url
+  url: url,
+  mongodb: mongodb
 }

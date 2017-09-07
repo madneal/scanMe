@@ -31,5 +31,6 @@ const matchReg = (str, type) => {
 
 module.exports = {
   trimStr: trimStr,
-  strictTrim: strictTrim
+  strictTrim: strictTrim,
+  matchReg: matchReg
 }
