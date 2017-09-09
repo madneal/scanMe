@@ -12,9 +12,13 @@ const modelSave = saveModel.modelSave;
 
 const makeRequest = (requestConfig, stationInfo) => {
   request(requestConfig, (err, res, body) => {
-    if (res) {
+    if (res && res.statusCode === '200') {
       const result = parseBody(body);
       modelSave(result, stationInfo);
+    } else {
+      console.error(chalk.red('There is no response for ' + requestConfig.url));
+      console.dir(stationInfo);
+      // console.error(chalk.red('response code:' + res.code));
     }
   })
 }

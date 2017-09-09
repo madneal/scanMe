@@ -12,6 +12,7 @@ const parseBody = body => {
     let info = {};
     const $ = cheerio.load(elem);
     const title = trim($('.prop-title').text());
+    const url = 'http://sh.lianjia.com/' + $('.prop-title').attr('href');
     const mainInfo = strictTrim($('.info-table .row1-text').text());
     const totalPrice = +trim($('.info-table .total-price').text());
     const unitPrice = +matchReg(strictTrim($('.info-table .price-item').eq(1).text()), 'num');
@@ -36,7 +37,8 @@ const parseBody = body => {
       unitPrice: unitPrice,
       totalPrice: totalPrice,
       location: location,
-      specialExplain: specialExplain
+      specialExplain: specialExplain,
+      url: url
     };
     console.dir(info);
     result.push(info);
