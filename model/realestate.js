@@ -3,9 +3,11 @@ module.exports = mongoose => {
 
   const realEstateInfoSchema = new Schema({
     title: String,
+    station: String,
     mainInfo: String,
-    unitPrice: String,
-    totalPrice: String,
+    unitPrice: Integer,
+    totalPrice: Integer,
+    location: String,
     specialExplain: String,
     updateTime: String
   });

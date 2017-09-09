@@ -22,10 +22,14 @@ const strictTrim = str => {
 
 const matchReg = (str, type) => {
   const result = str.match(regObj[type]);
-  if (result.length === 1) {
-    return result[0];
+  if (Array.isArray(result)) {
+    if (result.length === 1) {
+      return result[0];
+    } else {
+      console.log(chalk.red('the legnth of the matchReg is:' + result.length));
+    }
   } else {
-    console.log(chalk.red('the legnth of the matchReg is:' + result.length));
+    console.error(chalk.red('matchReg result is not array: ' + result));
   }
 }
 
