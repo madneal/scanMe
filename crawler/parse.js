@@ -15,8 +15,21 @@ const parseBody = body => {
     const mainInfo = strictTrim($('.info-table .row1-text').text());
     const totalPrice = +trim($('.info-table .total-price').text());
     const unitPrice = +matchReg(strictTrim($('.info-table .price-item').eq(1).text()), 'num');
-    const location = strictTrim($('.property-tag-container span').eq(0).text());
-    const specialExplain = $('.property-tag-container span').eq(1).text();
+    const spans = $('.property-tag-container span');
+    let location;
+    let specialExplain;
+    if (!spans) {
+      console.log('There is not location or specialExplain information');
+    } else {
+      if ($(spans).eq(0).text().indexOf('距离') !== -1) {
+        location = $(spans).eq(0).text();
+        specialExplain = $(spans).eq(1).text();
+      } else {
+        specialExplain = $(spans).eq(0).text();
+      }
+    }
+    // const location = strictTrim($('.property-tag-container span').eq(0).text());
+    // const specialExplain = $('.property-tag-container span').eq(1).text();
     info = {
       title: title,
       mainInfo: mainInfo,
