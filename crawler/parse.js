@@ -8,6 +8,8 @@ const strictTrim = utils.strictTrim;
 const parseBody = body => {
   const $ = cheerio.load(body);
   let result = [];
+  const lastPage = $('.c-pagination').children().last().text();
+  const isNextPage = lastPage === '下一页' ? true : false;
   $('.js_fang_list li').each((i, elem) => {
     let info = {};
     const $ = cheerio.load(elem);
@@ -20,7 +22,7 @@ const parseBody = body => {
     let location;
     let specialExplain;
     if (!spans) {
-      console.log('There is not location or specialExplain information');
+      console.log('There is not location or specialExplain information' + url);
     } else {
       if ($(spans).eq(0).text().indexOf('距离') !== -1) {
         location = $(spans).eq(0).text();
@@ -29,8 +31,6 @@ const parseBody = body => {
         specialExplain = $(spans).eq(0).text();
       }
     }
-    // const location = strictTrim($('.property-tag-container span').eq(0).text());
-    // const specialExplain = $('.property-tag-container span').eq(1).text();
     info = {
       title: title,
       mainInfo: mainInfo,
@@ -43,7 +43,10 @@ const parseBody = body => {
     console.dir(info);
     result.push(info);
   })
-  return result;
+  return {
+    result: result,
+    nextPageUrl: isNextPage ? $('.c-pagination').children().last().attr('href') : ''
+  }
 }
 
 module.exports = {

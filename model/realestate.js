@@ -9,7 +9,8 @@ module.exports = mongoose => {
     totalPrice: Integer,
     location: String,
     specialExplain: String,
-    updateTime: String
+    updateTime: String,
+    url: url
   });
 
   // realEstateInfoSchema.index({
