@@ -4,6 +4,7 @@ module.exports = mongoose => {
   const realEstateInfoSchema = new Schema({
     title: String,
     station: String,
+    line: String,
     mainInfo: String,
     unitPrice: Integer,
     totalPrice: Integer,
@@ -13,12 +14,14 @@ module.exports = mongoose => {
     url: url
   });
 
-  // realEstateInfoSchema.index({
-  //   'updateTime': 1
-  // }, {
-  //   unique: true,
-  //   strict: false
-  // });
+  realEstateInfoSchema.index({
+    'title': 1,
+    'line': 1,
+    'station': 1
+  }, {
+    unique: true,
+    strict: false
+  });
 
   mongoose.model('real_estate_info', realEstateInfoSchema);
 }

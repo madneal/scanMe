@@ -12,6 +12,9 @@ const modelSave = saveModel.modelSave;
 
 const makeRequest = (requestConfig, stationInfo) => {
   request(requestConfig, (err, res, body) => {
+    if (err) {
+      console.log(chalk.red('makeRequest error for ' + requestConfig.url + ' '+ err));
+    }
     if (res && res.statusCode === '200') {
       const parseResult = parseBody(body);
       const result = parseResult.result;
