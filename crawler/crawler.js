@@ -14,13 +14,14 @@ const makeRequest = (requestConfig, stationInfo) => {
   request(requestConfig, (err, res, body) => {
     if (err) {
       console.log(chalk.red('makeRequest error for ' + requestConfig.url + ' '+ err));
+      console.loh(chalk.red('response code:' + res.statusCode));
     }
-    if (res && res.statusCode === '200') {
+    if (res && res.statusCode === 200) {
       const parseResult = parseBody(body);
       const result = parseResult.result;
       modelSave(result, stationInfo);
       if (parseResult.nextPageUrl) {
-        requestConfig.url = url + nextPageUrl;
+        requestConfig.url = url.ershoufang.lianjia + parseResult.nextPageUrl;
         makeRequest(requestConfig, stationInfo);
       }
     } else {
@@ -38,7 +39,7 @@ const execute = () => {
     for (let i = 0; i < stationArr.length; i ++) {
       const station = stationArr[i];
       const requestConfig = {
-        url: config.url.ershoufang.lianjia +'rs' + station,
+        url: config.url.ershoufang.lianjia + 'rs' + station,
         encoding: 'utf-8'
       };
       const stationInfo = {
