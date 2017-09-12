@@ -14,7 +14,7 @@ const makeRequest = (requestConfig, stationInfo) => {
   request(requestConfig, (err, res, body) => {
     if (err) {
       console.log(chalk.red('makeRequest error for ' + requestConfig.url + ' '+ err));
-      console.loh(chalk.red('response code:' + res.statusCode));
+      console.log(chalk.red('response error:' + res));
     }
     if (res && res.statusCode === 200) {
       const parseResult = parseBody(body);
@@ -35,11 +35,12 @@ const execute = () => {
 
   for (var lineName in stations) {
     const line = lineName;
+    // const line = '1号线';
     const stationArr = stations[line];
-    for (let i = 0; i < stationArr.length; i ++) {
+    for (let i = 0; i < 1; i ++) {
       const station = stationArr[i];
       const requestConfig = {
-        url: config.url.ershoufang.lianjia + 'rs' + station,
+        url: config.url.ershoufang.lianjia + '/ershoufang/rs' + station,
         encoding: 'utf-8'
       };
       const stationInfo = {

@@ -4,7 +4,7 @@ const stationObj = JSON.parse(stationsStr);
 
 const url = {
   'ershoufang': {
-    'lianjia': 'http://sh.lianjia.com/ershoufang/'
+    'lianjia': 'http://sh.lianjia.com'
   }
 }
 

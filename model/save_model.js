@@ -12,16 +12,16 @@ const modelSave = (collection, station) => {
     ele.station = station.station;
     ele.line = station.line;
     ele.updateTime = new Date().Format('yyyy-MM-dd hh:mm:ss');
-    // realestateModel.collection.insert(ele);
-    realestateModel.update({
-      lien: ele.line,
-      station: ele.station,
-      title: ele.title
-    }, ele, (err,res) => {
-      if (err) {
-        console.error(err);
-      }
-    })
+    realestateModel.collection.insert(ele);
+    // realestateModel.collection.update({
+    //   lien: ele.line,
+    //   station: ele.station,
+    //   title: ele.title
+    // }, ele, (err,res) => {
+    //   if (err) {
+    //     console.error(err);
+    //   }
+    // })
   }
 }
 
