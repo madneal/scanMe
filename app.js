@@ -1,4 +1,3 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -71,6 +70,6 @@ function normalizePort(val) {
 }
 
 
-schedule.playJob();
+// schedule.playJob();
 
 module.exports = app;
