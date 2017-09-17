@@ -35,7 +35,6 @@ const execute = () => {
 
   for (var lineName in stations) {
     const line = lineName;
-    // const line = '1号线';
     const stationArr = stations[line];
     for (let i = 0; i < 1; i ++) {
       const station = stationArr[i];

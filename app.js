@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
 
 const config = require('./config/config');
 const schedule = require('./schedule/schedule');
 const modelLoader = require('./model/model_loder');
 
-var app = express();
+const app = express();
 
 modelLoader.initMongooseAndLoadModel(app, config.mongodb);
 
@@ -33,14 +34,10 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// console.dir(config.stationArr);
-schedule.playJob();
-
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -52,5 +49,28 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const port = normalizePort(process.env.PORT || '3000');
+
+app.listen(port);
+
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+
+schedule.playJob();
 
 module.exports = app;

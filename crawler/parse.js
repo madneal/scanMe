@@ -41,13 +41,13 @@ const parseBody = body => {
         specialExplain = $(spans).eq(0).text();
       }
     }
-    const info = parseMainInfo(mainInfo);
+    const houseInfo = parseMainInfo(mainInfo);
     info = {
       title: title,
-      type: info.type,
-      square: info.square,
-      direction: info.direction,
-      floor: info.floor,
+      type: houseInfo.type,
+      square: houseInfo.square,
+      direction: houseInfo.direction,
+      floor: houseInfo.floor,
       unitPrice: unitPrice,
       totalPrice: totalPrice,
       location: location,
