@@ -4,20 +4,22 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressVue = require('express-vue');
+const mongoose = require('mongoose');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
-
 const config = require('./config/config');
 const schedule = require('./schedule/schedule');
 const modelLoader = require('./model/model_loder');
 
 const app = express();
+const router = express.Router();
 
 modelLoader.initMongooseAndLoadModel(app, config.mongodb);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -28,10 +30,54 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+// app.use('/', index);
+// app.use('/users', users);
 
-// catch 404 and forward to error handler
+const vueOptions = {
+  rootPath: path.join(__dirname, '/views'),
+  layout: {
+      start: '<body><div id="app">',
+      end: '</div></body>'
+  }
+};
+const expressVueMiddleware = expressVue.init(vueOptions);
+app.use(expressVueMiddleware);
+
+const pageTitle = '链家二手房信息爬取';
+const model = mongoose.model('realestate');
+let queryCretia = {};
+const queryResult = (queryCretia, data) => {
+    console.log('enter queryResult');
+    model.find(queryCretia, (err, docs) => {
+        console.log('first');
+        console.dir(docs);
+        docs = docs.map(doc => {
+            return doc.toObject();
+        })
+        console.log('second');
+        console.dir(docs);
+        data.real_estate_info = docs;
+    });
+    return data;
+}
+
+app.get('/', function (req, res) {
+  console.log('enter /');
+  let data = {
+      title: pageTitle,
+    };
+  const queryCriteria = {};
+  data = queryResult(queryCriteria, data);
+
+  const vue = {
+      head: {
+          title: pageTitle
+      }
+  };
+  res.renderVue('index', data, vue);
+});
+
+//catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
@@ -49,26 +95,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const port = normalizePort(process.env.PORT || '3000');
-
-app.listen(port);
-
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
+app.listen(3000);
 
 // schedule.playJob();
 
