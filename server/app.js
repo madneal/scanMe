@@ -49,25 +49,21 @@ let queryCretia = {};
 const queryResult = (queryCretia, data) => {
     console.log('enter queryResult');
     model.find(queryCretia, (err, docs) => {
-        console.log('first');
-        console.dir(docs);
         docs = docs.map(doc => {
             return doc.toObject();
         })
-        console.log('second');
-        console.dir(docs);
         data.real_estate_info = docs;
     });
     return data;
-}
+};
 
-app.get('/', function (req, res) {
-  console.log('enter /');
+app.get('/', async (req, res) => {
   let data = {
       title: pageTitle,
     };
   const queryCriteria = {};
-  data = queryResult(queryCriteria, data);
+
+  data = await queryResult(queryCriteria, data);
 
   const vue = {
       head: {
