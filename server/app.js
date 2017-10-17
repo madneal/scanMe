@@ -4,7 +4,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const expressVue = require('express-vue');
 const mongoose = require('mongoose');
 
 const index = require('./routes/index');
@@ -33,15 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', index);
 // app.use('/users', users);
 
-const vueOptions = {
-  rootPath: path.join(__dirname, '/views'),
-  layout: {
-      start: '<body><div id="app">',
-      end: '</div></body>'
-  }
-};
-const expressVueMiddleware = expressVue.init(vueOptions);
-app.use(expressVueMiddleware);
 
 const pageTitle = '链家二手房信息爬取';
 const model = mongoose.model('realestate');
