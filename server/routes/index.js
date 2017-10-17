@@ -2,15 +2,24 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const fs = require('fs');
-/* GET home page. */
+
+
 
 const formatDocs = docs => {
-  docs.forEach(doc => {
-    console.log(doc);
-    doc = doc.toObject();
+  const docs1 = docs.map(doc => {
+    return doc.toObject();
   })
-  return docs;
+  return docs1;
 }
+
+router.get('/data', (req, res, next) => {
+  const model = mongoose.model('realestate');
+  let queryCretia = {};
+  model.find(queryCretia, (err, docs) => {
+    res.send(formatDocs(docs));
+  })
+})
+
 router.get('/', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   const model = mongoose.model('realestate');
