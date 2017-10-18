@@ -53,7 +53,8 @@ const parseBody = body => {
       location: location,
       specialExplain: specialExplain,
       url: url,
-      line: matchReg(location, 'line')
+      line: matchReg(location, 'line'),
+      station: matchReg(location, 'station').replace('线', '')
     };
     console.dir(info);
     result.push(info);

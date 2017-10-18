@@ -19,7 +19,7 @@ const makeRequest = (requestConfig, stationInfo) => {
     if (res && res.statusCode === 200) {
       const parseResult = parseBody(body);
       const result = parseResult.result;
-      modelSave(result, stationInfo);
+      modelSave(result);
       if (parseResult.nextPageUrl) {
         requestConfig.url = url.ershoufang.lianjia + parseResult.nextPageUrl;
         makeRequest(requestConfig, stationInfo);
