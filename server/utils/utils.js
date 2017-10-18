@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const regObj = {
   'num': /\d+/,
   'line': /\d+号线/,
-  'station': /线[\u4e00-\u9fa5]+站/,
+  'station': /\d+号线([\u4e00-\u9fa5]+)\d+米/,
   'distance': /\d+米/
 }
 
@@ -27,7 +27,11 @@ const matchReg = (str, type) => {
   const result = str.match(regObj[type]);
   if (Array.isArray(result)) {
     if (result.length === 1) {
-      return result[0];
+      if (type !== 'station') {
+        return result[0];
+      } else {
+        return result[1];
+      }
     } else {
       console.log(chalk.red('the legnth of the matchReg is:' + result.length));
     }
