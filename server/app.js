@@ -32,37 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 // app.use('/users', users);
 
-
-const pageTitle = '链家二手房信息爬取';
-const model = mongoose.model('realestate');
-let queryCretia = {};
-const queryResult = (queryCretia, data) => {
-    console.log('enter queryResult');
-    model.find(queryCretia, (err, docs) => {
-        docs = docs.map(doc => {
-            return doc.toObject();
-        })
-        data.real_estate_info = docs;
-    });
-    return data;
-};
-
-app.get('/', async (req, res) => {
-  let data = {
-      title: pageTitle,
-    };
-  const queryCriteria = {};
-
-  data = await queryResult(queryCriteria, data);
-
-  const vue = {
-      head: {
-          title: pageTitle
-      }
-  };
-  res.renderVue('index', data, vue);
-});
-
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
