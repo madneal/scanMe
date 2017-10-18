@@ -52,7 +52,8 @@ const parseBody = body => {
       totalPrice: totalPrice,
       location: location,
       specialExplain: specialExplain,
-      url: url
+      url: url,
+      line: matchReg(location, 'line')
     };
     console.dir(info);
     result.push(info);

@@ -1,7 +1,8 @@
 const chalk = require('chalk');
 
 const regObj = {
-  'num': /\d+/
+  'num': /\d+/,
+  'line': /\d+号线/
 }
 
 const trimStr = str => {
