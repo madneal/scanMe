@@ -3,6 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import echarts from 'echarts'
+import { Select, Option } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.prototype.$echarts = echarts
+Vue.prototype.$ELEMENT = { size: 'small' }
+Vue.use(Select)
+Vue.use(Option)
 
 Vue.config.productionTip = false
 
