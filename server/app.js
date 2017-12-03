@@ -52,6 +52,6 @@ app.use(function(err, req, res, next) {
 
 app.listen(3000);
 
-// schedule.playJob();
+schedule.playJob();
 
 module.exports = app;

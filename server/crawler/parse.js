@@ -31,6 +31,7 @@ const parseBody = body => {
     const spans = $('.property-tag-container span');
     let location;
     let specialExplain;
+    let line, station, distance;
     if (!spans) {
       console.log('There is not location or specialExplain information' + url);
     } else {
@@ -40,6 +41,13 @@ const parseBody = body => {
       } else {
         specialExplain = $(spans).eq(0).text();
       }
+    }
+    if (location) {
+      line = matchReg(location, 'line');
+      station = matchReg(location, 'station');
+      distance = matchReg(location, 'distance');
+    } else {
+
     }
     const houseInfo = parseMainInfo(mainInfo);
     info = {
@@ -53,9 +61,9 @@ const parseBody = body => {
       location: location,
       specialExplain: specialExplain,
       url: url,
-      line: matchReg(location, 'line'),
-      station: matchReg(location, 'station').replace('线', ''),
-      distance: matchReg(location, 'distance').replace('米', '')
+      line: line,
+      station: station,
+      distance: distance
     };
     console.dir(info);
     result.push(info);
