@@ -1,13 +1,20 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use chrono::{DateTime, FixedOffset};
 
 #[derive(Debug)]
 struct AccessLogEntry {
     ip: String,
-    timestamp: u64,
-    request: String,
-    status_code: u16,
-    user_agent: String,
+    remote_user: Option<String>,
+    user: Option<String>,
+    datetime: DateTime<FixedOffset>,
+    method: String,
+    path: String,
+    protocol: String,
+    status: u16,
+    length: Option<usize>,
+    referer: Option<String>,
+    user_agent: Option<String>,
 }
 
 fn main() {
